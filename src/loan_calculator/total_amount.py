@@ -4,25 +4,34 @@ def total_amount(P, annual_rate, desired_monthly_payment):
     balance = P
     total_paid = 0
     months = 0
+    years = 0
+
+    if desired_monthly_payment <= r * balance:
+        raise ValueError("Desired monthly payment is too low to cover the interest.")
 
     while balance > 0:
         interest = balance * r
         principal_paid = desired_monthly_payment - interest
-
-        if principal_paid < 0:
-            raise ValueError("Desired monthly payment is too low to cover the interest.")
         
         balance -= principal_paid
         total_paid += desired_monthly_payment
         months += 1
 
+        if balance < 0:
+            balance = 0
+
     total_interest = total_paid - P
 
+    years = months // 12
+    remaining_months = months % 12
+
     return {
-        "Total Amount Paid: ": total_paid, 
-        "Total Interest Paid: ":total_interest, 
-        "Months to Pay Off: ": months
+        "Total Amount Paid": total_paid, 
+        "Total Interest Paid":total_interest, 
+        "Time to Pay Off": f"{years if years > 0 else '0'} years and {remaining_months if remaining_months > 0 else '0'} months"
         }
 
-print(total_amount(490000, 0.04, 2700))
+
+if __name__ == "__main__":
+    print(total_amount(450000, 0.04, 2400))
 
