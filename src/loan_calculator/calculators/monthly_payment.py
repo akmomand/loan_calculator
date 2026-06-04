@@ -15,5 +15,6 @@ def prin_int(P, annual_rate, years):
         return P * (r * (1 + r) ** n) / ((1 + r) ** n - 1)
 
 
-print(prin_int(490000, 0.03, 30))
+if __name__ == "__main__":
+    print(prin_int(490000, 0.03, 30))
     
