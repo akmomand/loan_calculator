@@ -58,13 +58,23 @@ def prin_int(P, annual_rate, years):
         })
 
     schedule_df = pd.DataFrame(schedule)
-    return round(monthly_payment, 2), schedule_df
+    ## ADDED
+    total_prin_paid = schedule_df['principal'].sum()
+    total_int_paid = schedule_df['interest'].sum()
+    total_payment = schedule_df['total_payment'].sum()
+    ##
+
+    return round(monthly_payment, 2), schedule_df, total_prin_paid, total_int_paid, total_payment
 
 
 # if __name__ == "__main__":
 #     print(prin_int(490000, 0.03, 30))
 
 if __name__ == "__main__":
-    principal, schedule = prin_int(500000, 0.05, 5)
-    print(f"Monthly Payment: {principal}")
+    monthly_payment, schedule, total_prin_paid, total_int_paid, total_payment = prin_int(15000, 0.154, 6)
+    print(f"Monthly Payment: {monthly_payment}")
     print(schedule.to_string(index=False))
+    ## ADDED
+    print(f"Total Principal Paid: {total_prin_paid}")
+    print(f"Total Interest Paid: {total_int_paid}")
+    print(f"Total Payment: {total_payment}")

@@ -17,21 +17,17 @@ def payoff_length(P, annual_rate, monthly_payment):
             balance = 0
     
 
-    years = months / 12
+
 
     total_interest = total_paid - P
 
-    return {
-        "Principal: ": P,
-        "Total Amount Paid: ": total_paid,
-        "Total Interest Paid: ": total_interest,
-        "Years to Pay Off: ": years,
-        "Months to Pay Off: ": months
-    }
+    years = months // 12
+    remaining_months = months % 12
+
+    return P, total_paid, total_interest, years, remaining_months
+    
         
 
 if __name__ == "__main__":
-    principal = 500000
-    annual_rate = 0.05
-    monthly_payment = 3000
-    print(payoff_length(principal, annual_rate, monthly_payment))
+    P, total_paid, total_interest, years, remaining_months = payoff_length(15000, 0.154, 322)
+    print(f"Principal: {P} \nTotal Amount Paid: {total_paid} \nTotal Interest Paid: {total_interest} \nTime to Pay Off: {years} years and {remaining_months} months")
